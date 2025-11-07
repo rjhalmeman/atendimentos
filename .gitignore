@@ -29,4 +29,3 @@ __pycache__/
 *.key
 *.pem
 
-node_modules
