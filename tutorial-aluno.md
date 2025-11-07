@@ -1,9 +1,6 @@
 
 ## TUTORIAL ALUNO
 
-
-
-```markdown
 # 🎓 Tutorial Aluno - Como Baixar seu Projeto Corrigido
 
 ## Método 1: Download Direto (Mais Fácil)
