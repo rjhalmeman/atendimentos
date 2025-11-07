@@ -138,12 +138,12 @@ function salvar() {
     if (patrimonio && descricao && dataDeAquisicao && localizacao && emManutencao) {// se tudo certo 
         switch (oQueEstaFazendo) {
             case 'inserindo':
-                equipamentos = new Equipamentos(patrimonio, descricao, dataDeAquisicao, localizacao, emManutencao,  dataConclusao);
+                equipamentos = new Equipamentos(patrimonio, descricao, dataDeAquisicao, localizacao, emManutencao, dataConclusao);
                 listaEquipamentos.push(equipamentos);
                 mostrarAviso("Inserido na lista");
                 break;
             case 'alterando':
-                equipamentosAlterado = new Equipamentos(patrimonio, descricao, dataDeAquisicao, localizacao, emManutencao,  dataConclusao);
+                equipamentosAlterado = new Equipamentos(patrimonio, descricao, dataDeAquisicao, localizacao, emManutencao, dataConclusao);
                 listaEquipamentos[equipamentos.posicaoNaLista] = equipamentosAlterado;
                 mostrarAviso("Alterado");
                 break;
@@ -211,7 +211,7 @@ function mostrarDadosequipamentos(equipamentos) {
 
     //inputDataDeAquisicao como select, então atribui o valor diretamente
     document.getElementById("inputDataDeAquisicao").value = equipamentos.dataDeAquisicao;
-    document.getElementById("inputlocalizacao").value = equipamentos.localizacao;    
+    document.getElementById("inputlocalizacao").value = equipamentos.localizacao;
     document.getElementById("inputEmManutencao").checked = equipamentos.emManutencao == "Sim" ? true : false;
     document.getElementById("inputDataConclusao").value = equipamentos.dataConclusao;
 
@@ -303,7 +303,7 @@ function prepararESalvarCSV() { //gera um arquivo csv com as informações da li
             linha.descricao + ";" +
             linha.dataDeAquisicao + ";" +
             linha.localizacao + ";" +
-            linha.emManutencao + ";" +            
+            linha.emManutencao + ";" +
             linha.dataConclusao + "\n"
     }
     persistirEmLocalPermanente(nomeDoArquivoDestino, textoCSV);
@@ -328,7 +328,7 @@ function converterDeCSVparaListaObjeto(arquivo) {
                         descricao: dados[1],
                         dataDeAquisicao: dados[2],
                         localizacao: dados[3],
-                        emManutencao: dados[4],                        
+                        emManutencao: dados[4],
                         dataConclusao: dados[5]
                     });
                 }

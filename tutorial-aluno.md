@@ -13,7 +13,7 @@
 - Clique no botão "branches" ou "2 branches"
 
 ### 2. ENCONTRAR SUA BRANCH
-- Procure pela branch com seu nome: `aluno-seu-nome`
+- Procure pela branch com seu nome: `seu-nome`
 - Clique nela
 
 ### 3. BAIXAR O PROJETO
