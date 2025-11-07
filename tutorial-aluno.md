@@ -13,6 +13,8 @@
 
 - Clique no botão "branches" 
 
+![alt text](image.png)
+
 ### 2. ENCONTRAR SUA BRANCH
 - Procure pela branch com seu nome: `seuNome`
 - Clique nela

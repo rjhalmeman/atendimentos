@@ -17,8 +17,6 @@ Professor faz correções e commits
 Aluno baixa sua branch corrigida
 
 
-
-
 # 🎯 Atendimentos - Projetos de Alunos
 
 Repositório para correção e acompanhamento de projetos dos alunos.
