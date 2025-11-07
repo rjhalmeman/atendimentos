@@ -1,20 +1,6 @@
 
 ## TUTORIAL ALUNO
 
-FLUXO DE TRABALHO SUGERIDO:
-Aluno envia projeto ZIP por email/WhatsApp
-
-Professor cria branch específica (aluno-nome-sobrenome)
-
-Professor extrai ZIP na pasta do aluno
-
-Professor faz correções e commits
-
-Aluno baixa sua branch corrigida
-
-Aluno estuda as correções
-
-Esta estrutura é simples, organizada e focada na facilidade de uso para iniciantes!
 
 
 ```markdown

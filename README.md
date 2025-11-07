@@ -2,6 +2,23 @@ algo
 ## README PRINCIPAL
 
 ```markdown
+
+
+
+FLUXO DE TRABALHO SUGERIDO:
+Aluno envia projeto ZIP por email/WhatsApp
+
+Professor cria branch específica (aluno-nome-sobrenome)
+
+Professor extrai ZIP na pasta do aluno
+
+Professor faz correções e commits
+
+Aluno baixa sua branch corrigida
+
+
+
+
 # 🎯 Atendimentos - Projetos de Alunos
 
 Repositório para correção e acompanhamento de projetos dos alunos.
