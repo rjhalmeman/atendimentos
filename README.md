@@ -46,5 +46,5 @@ atendimentos/
 **Professor**: Crie uma branch para cada aluno com as correções
 
 ## 📞 SUPORTE
-Em caso de dúvidas, entre em contato com o professor.
+Em caso de dúvidas, entre em contato com o professor. Via whatsapp.
 

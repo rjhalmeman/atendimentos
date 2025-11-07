@@ -16,19 +16,19 @@ cd atendimentos
 
 ``` bash
 # Crie uma branch com o nome do aluno
-git checkout -b aluno-nome-sobrenome
+git checkout -b aluno-dataAtual
 
 # Exemplo:
-git checkout -b aluno-joao-silva
+git checkout -b aluno-dataAtual
 ``` 
 ### 3. ADICIONAR PROJETO DO ALUNO
 
 ``` bash
 # Crie pasta para o projeto
-mkdir projetos/aluno-joao-silva
+mkdir projetos/aluno-dataAtual
 
 # Extraia o ZIP do aluno nesta pasta
-# (copie todos os arquivos do ZIP para projetos/aluno-joao-silva/)
+# (copie todos os arquivos do ZIP para projetos/aluno-dataAtual/)
 
 ```
 
@@ -42,7 +42,7 @@ git add .
 git commit -m "Adiciona projeto do João Silva - [data]"
 
 # Envie para o GitHub
-git push origin aluno-joao-silva
+git push origin aluno-dataAtual
 
 ``` 
 5. FAZER CORREÇÕES
@@ -52,7 +52,7 @@ git push origin aluno-joao-silva
 
 git add .
 git commit -m "Correções no projeto do João Silva"
-git push origin aluno-joao-silva
+git push origin aluno-dataAtual
 ``` 
 
 6. VOLTAR PARA BRANCH PRINCIPAL
