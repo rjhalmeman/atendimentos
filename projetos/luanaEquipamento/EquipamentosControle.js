@@ -17,12 +17,18 @@ function procurePorChavePrimaria(chave) {
 // Função para procurar um elemento pela chave primária   -------------------------------------------------------------
 function procure() {
     const patrimonio = document.getElementById("inputPatrimonio").value;
+
+
     if (isNaN(patrimonio) || !Number.isInteger(Number(patrimonio))) {
         mostrarAviso("Precisa ser um número inteiro");
         document.getElementById("inputPatrimonio").focus();
         return;
     } else if (patrimonio <= 0) {
         mostrarAviso("Precisa ser um número inteiro MAIOR que zero");
+        document.getElementById("inputPatrimonio").focus();
+        return;
+    } else if (patrimonio.length != 6) {
+        mostrarAviso("Patrimonio precisa ter obrigatoriamente 6 digitos");
         document.getElementById("inputPatrimonio").focus();
         return;
     }
@@ -75,6 +81,17 @@ function excluir() {
     mostrarAviso("EXCLUINDO - clic o botão salvar para confirmar a exclusão");
 }
 
+// Função para formatar a data no formato DD/MM/AAAA
+function formatarDataDDMMYYYY(dataISO) {
+    // Exemplo de entrada: "2025-11-07"
+    const partes = dataISO.split('-'); // divide em ["2025", "11", "07"]
+    const ano = partes[0];
+    const mes = partes[1];
+    const dia = partes[2];
+
+    return `${dia}/${mes}/${ano}`;
+}
+
 function salvar() {
     //gerencia operações inserir, alterar e excluir na lista
 
@@ -88,56 +105,45 @@ function salvar() {
     }
 
     const descricao = document.getElementById("inputdescricao").value;
-    const dataDeAquisicao = document.getElementById("dataDeAquisicao").value;
+    const dataDeAquisicao = document.getElementById("inputDataDeAquisicao").value;
     const localizacao = document.getElementById("inputlocalizacao").value;
-    const emManutencao = parseInt(document.getElementById("emManutencao").value);
+    // const emManutencao = parseInt(document.getElementById("inputEmManutencao").value);
 
 
-    if (patrimonio <= ) {
-        mostrarAviso("Patrimonio precisa ter obrigatoriamente 6 digitos");
-        document.getElementById("patrimonio").focus();
-        return;
-    }
 
-    function formatarData(dataDeAquisicao) {
-        // Exemplo de entrada: "2025-11-07"
-        const partes = dataISO.split('-'); // divide em ["2025", "11", "07"]
-        const ano = partes[0];
-        const mes = partes[1];
-        const dia = partes[2];
-
-        return `${dia}/${mes}/${ano}`;
-    }
-
-    const campoData = document.getElementById('inputdataDeAquisicao');
+    const campoData = document.getElementById('inputDataDeAquisicao');
 
     // Data atual no formato YYYY-MM-DD
+    // Usamos new Date() e formatamos para YYYY-MM-DD para uma comparação de string consistente
     const hoje = new Date().toISOString().split('T')[0];
-    campoData.addEventListener'change', function () {
+
     const dataEscolhida = campoData.value;
 
+    // --- Lógica Ajustada ---
+    // A validação é que a data escolhida DEVE ser maior que a data atual.
+    // Se for menor ou igual, disparamos o erro.
     if (dataEscolhida > hoje) {
-        alert("A data não pode ser posterior à data atual!");
+        mostrarAviso("🚨 A data deve ser anterior à data atual!");
         campoData.value = ""; // limpa o campo
+        return;
     } else {
-
-        alert("Data escolhida " + formatarData(campoData.value) + " Data válida!");
+        const dataFormatada = typeof formatarDataDDMMYYYY === 'function' ? formatarDataDDMMYYYY(dataEscolhida) : dataEscolhida;
     }
 
+    let dataConclusao = document.getElementById("inputDataConclusao").value;
 
-
-    let manutencao = document.getElementById("inputmanutencao").checked;
-    let manutencaoTraduzido = manutencao ? "Sim" : "Não";// para armazenar na lista como "Sim" ou "Não"
+    let manutencao = document.getElementById("inputEmManutencao").checked;
+    let emManutencao = manutencao ? "Sim" : "Não";// para armazenar na lista como "Sim" ou "Não"
     //verificar se o que foi digitado pelo USUÁRIO está correto
-    if (patrimonio && descricao && dataDeAquisicao && localizacao && emManutencao ) {// se tudo certo 
+    if (patrimonio && descricao && dataDeAquisicao && localizacao && emManutencao) {// se tudo certo 
         switch (oQueEstaFazendo) {
             case 'inserindo':
-                equipamentos = new equipamentos(patrimonio, descricao, dataDeAquisicao, localizacao, emManutencao, manutencaoTraduzido, dataConclusao);
+                equipamentos = new Equipamentos(patrimonio, descricao, dataDeAquisicao, localizacao, emManutencao,  dataConclusao);
                 listaEquipamentos.push(equipamentos);
                 mostrarAviso("Inserido na lista");
                 break;
             case 'alterando':
-                equipamentosAlterado = new equipamentos(patrimonio, descricao, dataDeAquisicao, localizacao, emManutencao, manutencaoTraduzido, dataConclusao);
+                equipamentosAlterado = new Equipamentos(patrimonio, descricao, dataDeAquisicao, localizacao, emManutencao,  dataConclusao);
                 listaEquipamentos[equipamentos.posicaoNaLista] = equipamentosAlterado;
                 mostrarAviso("Alterado");
                 break;
@@ -176,7 +182,6 @@ function preparaListagem(vetor) {
             linha.dataDeAquisicao + " - " +
             linha.localizacao + " - " +
             linha.emManutencao + " - " +
-            linha.manutencao + " - " +
             linha.dataConclusao + "<br>";
     }
     return texto;
@@ -204,11 +209,10 @@ function mostrarDadosequipamentos(equipamentos) {
     document.getElementById("inputPatrimonio").value = equipamentos.patrimonio;
     document.getElementById("inputdescricao").value = equipamentos.descricao;
 
-    //dataDeAquisicao como select, então atribui o valor diretamente
-    document.getElementById("dataDeAquisicao").value = equipamentos.dataDeAquisicao;
-    document.getElementById("inputlocalizacao").value = equipamentos.localizacao;
-    document.getElementById("emManutencao").value = equipamentos.emManutencao;
-    document.getElementById("inputmanutencao").checked = equipamentos.manutencao == "Sim" ? true : false;
+    //inputDataDeAquisicao como select, então atribui o valor diretamente
+    document.getElementById("inputDataDeAquisicao").value = equipamentos.dataDeAquisicao;
+    document.getElementById("inputlocalizacao").value = equipamentos.localizacao;    
+    document.getElementById("inputEmManutencao").checked = equipamentos.emManutencao == "Sim" ? true : false;
     document.getElementById("inputDataConclusao").value = equipamentos.dataConclusao;
 
     // Define os campos como readonly
@@ -217,12 +221,13 @@ function mostrarDadosequipamentos(equipamentos) {
 
 // Função para limpar os dados dos campos
 function limparAtributos() {
-    document.getElementById("inputPatrimonio").value = "";
+    // document.getElementById("inputPatrimonio").value = ""; /// esse não pode ser limpado
     document.getElementById("inputdescricao").value = "";
-    document.getElementById("dataDeAquisicao").value = "";
+    document.getElementById("inputDataDeAquisicao").value = "";
     document.getElementById("inputlocalizacao").value = "";
-    document.getElementById("inputemManutencao").checked = false;
-    
+    document.getElementById("inputEmManutencao").checked = false;
+    document.getElementById("inputDataConclusao").value = "";
+
 
     bloquearAtributos(true);
 }
@@ -231,10 +236,9 @@ function bloquearAtributos(soLeitura) {
     //quando a chave primaria possibilita edicao, tranca (readonly) os outros e vice-versa
     document.getElementById("inputPatrimonio").readOnly = !soLeitura;
     document.getElementById("inputdescricao").readOnly = soLeitura;
-    document.getElementById("dataDeAquisicao").readOnly = soLeitura;
+    document.getElementById("inputDataDeAquisicao").readOnly = soLeitura;
     document.getElementById("inputlocalizacao").readOnly = soLeitura;
-    document.getElementById("emManutencao").readOnly = soLeitura;
-    document.getElementById("inputmanutencao").readOnly = soLeitura;
+    document.getElementById("inputEmManutencao").readOnly = soLeitura;
     document.getElementById("inputDataConclusao").readOnly = soLeitura;
 }
 
@@ -299,9 +303,8 @@ function prepararESalvarCSV() { //gera um arquivo csv com as informações da li
             linha.descricao + ";" +
             linha.dataDeAquisicao + ";" +
             linha.localizacao + ";" +
-            linha.emManutencao + ";" +
-            linha.manutencao + ";" +
-            linha.dataConclusao + ";"
+            linha.emManutencao + ";" +            
+            linha.dataConclusao + "\n"
     }
     persistirEmLocalPermanente(nomeDoArquivoDestino, textoCSV);
 }
@@ -318,16 +321,15 @@ function converterDeCSVparaListaObjeto(arquivo) {
             const linha = linhas[i].trim();  //linhas[i] representa cada linha do arquivo CSV
             if (linha) { //verifica se a linha não está vazia
                 const dados = linha.split(';'); // Separa os dados por ';'
-                if (dados.length === 8) { //verifica os seis campos
+                if (dados.length === 6) { //verifica 
                     // Adiciona os dados à listaEquipamentos como um objeto
                     listaEquipamentos.push({
                         patrimonio: dados[0],
                         descricao: dados[1],
                         dataDeAquisicao: dados[2],
                         localizacao: dados[3],
-                        emManutencao: dados[4],
-                        manutencao: dados[6],
-                        dataConclusao: dados[7]
+                        emManutencao: dados[4],                        
+                        dataConclusao: dados[5]
                     });
                 }
             }
