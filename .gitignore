@@ -1,0 +1,32 @@
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (se for usar JavaScript)
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Arquivos sensíveis
+.env
+*.key
+*.pem
+
+node_modules
